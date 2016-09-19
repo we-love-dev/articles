@@ -1,0 +1,373 @@
+<h2>
+    Introdução
+</h2>
+
+<p>
+    Neste artigo iremos entender o funcionamento de um dos principais recursos do JavaScript.
+    Isso mesmo, funções são extremamente importantes e trazem um dinamismo ainda maior para a linguagem.
+</p>
+
+<p>
+    Com elas conseguimos simular diversas estruturas como classes, métodos, construtores e módulos.
+</p>
+
+<h2>
+    First Class e Higher Order
+</h2>
+
+<p>
+    Diferente do que estamos tradicionalmente acostumados em linguagens como Java ou C#, as funções em JavaScript podem ser atribuídas a variáveis, passadas por parâmetro e retornadas por outras funções.
+    Isso se dá devido às caracteristicas de <strong>First Class Functions</strong> e <strong>Higher Order Functions</strong>.
+</p>
+
+<p>
+    Exemplo:
+</p>
+
+<pre class="brush: js;">
+    function pegarValor(comparador, x, y) {
+        return comparador(x, y);
+    }
+
+    let maior = function(x, y) {
+        return x > y ? x : y;
+    };
+
+    pegarValor(maior, 1, 2);
+    // $ 2
+</pre>
+
+<h2>
+    Declaração
+</h2>
+
+<p>
+    A declaração de funções se dá a partir da palavra chave <i>function</i> e podem ser criadas das seguintes formas:
+</p>
+
+<dl>
+    <dt>Function Declaration</dt>
+    <dd>
+        Declaração explícita de função.
+        <br>
+        Exemplo:
+
+        <pre class="brush: js;">
+            function soma(x, y) {
+              return x + y;
+            }
+
+            soma(1, 2);
+            // $ 3
+        </pre>
+    </dd>
+
+    <dt>Function Expression</dt>
+    <dd>
+        Atribuição da função a uma variável.
+        <br>
+        Exemplo:
+
+        <pre class="brush: js;">
+            var soma = function(x, y) {
+              return x + y;
+            };
+
+            soma(1, 2);
+            // $ 3
+        </pre>
+    </dd>
+</dl>
+
+<p>
+    A grande diferença entre as duas formas de invocação é que as declaradas com <strong>Function Declaration</strong>
+    são carregadas antes da interpretação do código, devido ao comportamento de Hoisting da linguagem.
+</p>
+
+<p>
+    Caso possua dúvidas sobre este comportamento, fica aqui uma sugestão do
+    <a target="_blank" href="/post/zero-to-hero-javascript-hoisting">artigo sobre Hoisting</a>
+    postado aqui no blog ou este
+    <a target="_blank" href="https://youtu.be/JGpekHQ_9kY?list=PLDm7BSK-M5YloYXPGmK_KEno4_Ql_Q5nS">vídeo</a>
+    do canal Aulas de Programação.
+</p>
+
+<h2>
+    Invocação
+</h2>
+
+<p>
+    A declaração de uma função não necessariamente implica na invocação e execução da mesma.
+    Nesse sentido, existem quatro maneiras distintas para invocar uma função:
+</p>
+
+<dl>
+    <dt>Invocação direta</dt>
+    <dd>
+        A invocação direta se dá através do <strong>()</strong>.
+        <br>
+        Exemplo:
+
+        <pre class="brush: js;">
+            soma(1, 2);
+            // $ 3
+        </pre>
+    </dd>
+
+    <dt>Invocação através de objetos</dt>
+    <dd>
+        Invocação de funções dentro de objetos se dá através de variáveis.
+        Basicamente esta é a forma em que simulamos os famigerados métodos.
+        <br>
+        Exemplo:
+
+        <pre class="brush: js;">
+            var getNomeCompleto = function() {
+                return this.nome + ' ' + this.sobrenome;
+            };
+
+            var pessoa = {
+                nome: 'Renan',
+                sobrenome: 'Johannsen de Paula',
+                getNomeCompleto = getNomeCompleto
+            };
+
+            pessoa.getNomeCompleto();
+            // $ Renan Johannsen de Paula
+
+            getNomeCompleto();
+            // $ undefined undefined
+        </pre>
+
+        Repare que, na linha 2, o <strong>this</strong> assume o contexto da invocação da função, permitindo assim,
+        o acesso aos atributos do objeto.
+    </dd>
+
+    <dt>Invocação através de <i>call</i> e <i>apply</i></dt>
+    <dd>
+        Funções podem ser invocadas através dos métodos <strong>call</strong> e <strong>apply</strong> (contidos em seus protótipos).
+        Para este tipo de invocação devemos especificar o contexto e seus respectivos parâmetros.
+        <br>
+        Exemplo:
+
+        <pre class="brush: js;">
+            var pessoa = {
+              nome: 'Renan',
+              sobrenome: 'Johannsen de Paula'
+            };
+
+            var getNomeCompleto = function() {
+              return this.nome + ' ' + this.sobrenome;
+            };
+
+            getNomeCompleto.call(pessoa);
+            // $ Renan Johannsen de Paula
+
+            getNomeCompleto.apply(pessoa, []);
+            // $ Renan Johannsen de Paula
+        </pre>
+
+        A diferença entre o <strong>call</strong> e <strong>apply</strong> se da na forma como passamos os parâmetros.
+        No <i>call</i> utilizamos a invocação convencional e no <i>apply</i> utilizamos um array
+        para a passagem de parâmetros.
+    </dd>
+
+    <dt>Invocação através do operador <i>new</i></dt>
+    <dd>
+        Através do operador <strong>new</strong> podemos invocar funções para a criação de objetos.
+        Nestes casos as funções são denominadas <strong>Funções Construtoras</strong> onde, por convenção,
+        devem utilizar o padrão <strong>UpperCamelCase</strong> em seu nome.
+        <br>
+        Exemplo:
+
+        <pre class="brush: js;">
+            function Pessoa(nome, idade) {
+              this.nome = nome;
+              this.idade = idade;
+            }
+
+            var renan = new Pessoa('renan jp', 24);
+            var jov = new Pessoa('matheus', 26);
+        </pre>
+
+        O operador <strong>new</strong> basicamente cria implicitamento um novo objeto para ser passado como escopo da função,
+        ou seja, o <strong>this</strong> referencia o objeto que foi criado.
+        Desta forma conseguimos simular estruturas similares às classes do Java, C# etc.
+    </dd>
+
+    <dt>Invocação direta VS Invocação através do operador new</dt>
+    <dd>
+        Algumas pessoas possuem dúvidas entre a invocação direta e a invocação através do operador <strong>new</strong>.
+        Como foi dito no tópico anterior, o operador <strong>new</strong> retorna um novo objeto com base nas definições
+        da função, enquanto a invocação direta apenas retorna o que está no <strong>return</strong> da função.
+        <br>
+        Exemplo:
+
+        <pre class="brush: js;">
+            function Pessoa(nome, idade) {
+              this.nome = nome;
+              this.idade = idade;
+              this.getPersonInfo = function() {
+                return this.nome + ' ' + this.idade;
+              }
+
+              return this.getPersonInfo();
+            }
+
+            var renan = new Pessoa('renan jp', 24);
+            var jov = Pessoa('matheus', 26);
+        </pre>
+
+        A variável renan é <strong>objeto</strong> com as definições da função Pessoa, enquanto a variável <strong>jov</strong> é uma String
+        com a propriedade nome e idade informados por paramêtro.
+    </dd>
+
+</dl>
+
+<h2>
+    Closures
+</h2>
+
+<p>
+    Closures ou Fechamentos são a capacidade das funções se "lembrarem" do contexto de onde foram criadas.
+    Esta capacidade de associar dados do ambiente com uma função está diretamente ligada à orientção a objetos,
+    onde os objetos nos permitem associar dados (atributos) utilizando um ou mais métodos.
+</p>
+
+<p>
+    Esta característica é extremamente útil e importante para a criação de códigos robustos e dinâmicos.
+</p>
+
+<p>
+    Exemplo:
+</p>
+
+<pre class="brush: js;">
+    function soma(x) {
+      return function(y) {
+        return x + y;
+      };
+    }
+
+    var somaBase = soma(5);
+
+    var soma5 = somaBase(5);
+    // $ 10
+
+    var soma10 = somaBase(10);
+    // $ 15
+
+    var soma5e10 = soma(5)(10);
+    // $ 15
+</pre>
+
+<p>
+    Observe que na linha 7 o contexto da invocação da função <strong>soma</strong>
+    é armazenado e posteriormente utilizado nas linhas 9 e 12.
+
+    <strong>Curiosidade:</strong> como no javascript funções podem retornar outras funções, podemos executá-las
+    chamando apenas um ou mais <strong>()</strong> de acordo com a quantidade de funções retornadas.
+</p>
+
+<h2>
+    Currying
+</h2>
+
+<p>
+    Currying é uma característica de linguagens funcionais como por exemplo Haskell e Scala. O Javascript possui capacidades funcionais,
+    mas o Currying não é construído por padrão.
+    Esta capacidade consiste em transformar uma função com vários argumentos em uma cadeia de funções
+    composta de um único argumento por função.
+</p>
+
+<p>
+    Esta é uma prática útil mas pouco utilizada devido a complexidade do código que pode ser gerada.
+</p>
+
+<p>
+    Exemplo:
+</p>
+
+<pre class="brush: js;">
+    const one = document.getElementById('one');
+    const two = document.getElementById('two');
+
+    const f = function f(a) {
+       return function (b) {
+          return function (c) {
+             return a.addEventListener(b, function (event) {
+                event.target.style.backgroundColor = c;
+             });
+          };
+       };
+    };
+
+    const oneEventColor = f(one);
+    const twoEventColor = f(two);
+
+    oneEventColor('click')('blue');
+    oneEventColor('mouseout')('yellow');
+    twoEventColor('mouseouver')('red');
+</pre>
+
+<p>
+    Observe que na linha 14 e 15 armazenamos em variáveis as referências de funções que serão aplicadas no elementos <strong>one</strong> e <strong>two</strong>.
+    Com essa referência, atribuiremos o listener de <strong>click</strong>, que mudará a cor de background para azul, e o listener de <strong>mouseout</strong>, que mudará a cor para amarelo,
+    no elemento <strong>one</strong> e o listener de <strong>mouseouver</strong>, que mudará a cor para vermelho, no elemento <strong>two</strong>.
+</p>
+
+<h2>
+    Callback
+</h2>
+
+<p>
+    Callbacks são pedaços de códigos passados como parâmetro para serem executados no momento oportuno, como
+    por exemplo, após a consulta em banco de dados ou após a obtenção da resposta de uma requisição AJAX.
+</p>
+
+<p>
+    Esta estratégia é bem parecida com o padrão de projeto Listener.
+</p>
+
+<p>
+    Exemplo:
+</p>
+
+<pre class="brush: js;">
+    let query = { nome: 'renan' };
+
+    Cliente.find(query, callback);
+
+    // Esta função será executada após a pesquisa no banco de dados
+    function callback(err, data) {
+      if (err) console.log(err);
+      else console.log(data);
+    }
+</pre>
+
+<h2>
+    Conclusão
+</h2>
+
+<p>
+    Espero que vocês tenham gostado e entendido as
+    principais características sobre funções em JavaScript.
+</p>
+
+<p>
+    Gostaria deixar como indicação dois
+    <a target="_blank" href="https://youtu.be/OqR0hE-DQn4?list=PLQCmSnNFVYnT1-oeDOSBnt164802rkegc">vídeos</a>
+    sobre funções do Rodrigo Branas que estão disponíveis em seu canal no YouTube.
+</p>
+
+<p>
+    Um agradecimento especial ao
+     <a target="_blank" href="https://www.facebook.com/guilherme.cabrinidasilva">Guilherme Cabrini da Silva</a>,
+     <a target="_blank" href="https://www.facebook.com/homegui?fref=ts">Guilherme Carvalho</a>
+     e ao <a target="_blank" href="http://www.welovedev.com.br/author/falvojr">Venilton Falvo Jr</a>
+     que colaboraram com a revisão e incremento deste artigo!
+</p>
+
+<p>
+    Até a próxima e Abraços!
+</p>

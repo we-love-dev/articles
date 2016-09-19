@@ -1,0 +1,193 @@
+<h2>
+  Introdução
+</h2>
+
+<p>
+  REST (<strong>RE</strong>presentational <strong>S</strong>tate <strong>T</strong>ransfer) é um estilo arquitetural
+  derivado da composição de diversos outros estilos arquiteturais e padrões de projetos proposto por ------ em sua tese de -----.
+</p>
+
+<p>
+  Um aspecto importarte e que poucas pessoas sabem é que desde 1994, o REST vem sendo usado para guiar o design e a arquitetura
+  da Web moderna.
+  ----
+  Ou seja, para conseguirmos criar e extrair o máximo das aplicações Web modernas é necessário compreender o protocolo HTTP
+  e as influências trazidas pelo REST.
+</p>
+
+<p>
+  Neste artigo iremos compreender o funcionamento do protocolo HTTP e os principais padrões esperados de Webservices RESTful.
+</p>
+
+<h2>
+  Protocolo HTTP
+</h2>
+
+<p>
+  O protocolo HTTP (Hypertext Transfer Protocol) é um protocolo de comunicação entre cliente e servidor que
+  funciona através de <strong>Requisições (Request)</strong> e <strong>Respostas (Response)</strong> seguindo os padrões definidos na
+  <a class="special-link" href="https://tools.ietf.org/html/rfc2616">RFC2616</a>.
+</p>
+
+<h3>
+  Request
+</h3>
+
+<p>
+  Basicamente as requisições são composta de três partes.
+</p>
+
+<h4>Linha inicial (Request Line)</h4>
+
+<p>
+  A linha inicial é composta de três partes separadas por espaço.
+</p>
+
+<dl>
+  <dt>Método</dt>
+  <dd>
+    Detalha o tipo de processamento que será efetuado sobre um determinado recurso.
+  </dd>
+
+  <dt>URI</dt>
+  <dd>
+    Identifica o recurso alvo.
+  </dd>
+
+  <dt>Versão do Protocolo</dt>
+  <dd>
+    Especifica a forma de computação da requisição.
+  </dd>
+</dl>
+
+<p>
+  Exemplo:
+</p>
+
+<pre class="brush: js;">
+  POST http://www.minhaapi.com.br/v1/cliente HTTP/1.1
+</pre>
+
+<h4>
+  Cabeçalho (Request Header)
+</h4>
+
+<p>
+  Responsável por transferir informações adicionais entre o cliente e o servidor.
+  Uma estrutura chave-valor, opcional, especificada logo após a request line.
+</p>
+
+<p>
+  Exemplo:
+</p>
+
+<pre class="brush: js;">
+  POST http://www.minhaapi.com.br/v1/cliente HTTP/1.1
+  Accept: application/json; charset=utf-8
+  Accept-Language: pt
+  Content-Type: application/json; charset=utf-8
+</pre>
+
+<p>
+  Em outras palavras, o header basicamente detalha os metadados da requisição.
+</p>
+
+<h4>Corpo da requisição (Request Body)</h4>
+
+<p>
+  Alguns métodos do protocolo HTTP permitem o envio de dados para o servidor através do body da requisição.
+</p>
+
+<p>
+  É obrigatório a inserção de uma linha em branco entre o header e o body.
+</p>
+
+<p>
+  Exemplo:
+</p>
+
+<pre class="brush: js;">
+  POST http://www.minhaapi.com.br/v1/cliente HTTP/1.1
+  Accept: application/json; charset=utf-8
+  Accept-Language: pt
+  Content-Type: application/json; charset=utf-8
+  Content-Length: 39
+
+  { "nome" : "Renan Johannsen de Paula" }
+</pre>
+
+<h3>
+  Métodos (Request Methods)
+</h3>
+
+<p>
+  Os métodos de uma requisição indicam a ação a ser realizada sobre um determinado recurso.
+</p>
+
+<p>
+  Abaixo estão listados os oito métodos suportados pelo protocolo, bem como o seus respectivos objetivos:
+</p>
+
+<dl>
+  <dt>OPTIONS</dt>
+  <dd>
+    O método OPTIONS consulta os métodos suportados para um determinado recurso do servidor, ou seja, retorna a lista de operações aceitas sobre um determinado recurso.
+    <br><br>
+    Este método é muito útil pois pode ser utilizado e explorado pelos desenvolvedores na construção de robos e na documentação de APIs.
+  </dd>
+
+  <dt>GET</dt>
+  <dd>
+    O método GET, como o nome já diz, tem por objetivo a obtenção de um determinado recurso.
+    Por exemplo, se realizarmos um GET sobre a URI <strong>http://www.minhaapi.com.br/v1/clientes</strong> espera-se
+    que o servidor retorne a lista de clientes.
+    <br><br>
+    O método GET é considerado um método "seguro", pois semanticamente esta operação serve apenas para consultas,
+    ou seja, o recurso consultado não sofre alteração. Dado a esta característica o método GET não permite
+    o envio de um body na requisição, pois nenhum dado será inserido ou alterado.
+    <br><br>
+    Sempre que entramos em um website pelo nosso navegador o mesmo efetua uma operação de GET para a
+    obtenção do HTML a ser exibido.
+  </dd>
+
+  <dt>HEAD</dt>
+  <dd>
+    O método HEAD é uma variação do método GET onde o body da resposta não é retornado, ou seja,
+    serve para a verificação dos cabeçalhos e do status code retornado pelo servidor.
+    Pode ser utilizado para a validação de um determinado recurso, por exemplo, se um determinado cliente existe.
+  </dd>
+
+  <dt>POST</dt>
+  <dd>
+    O método POST serve para o processamento de uma determinada ação e dentre bem como a inclusão de novos registros.
+    <br><br>
+    Por exemplo, ao efetuarmos um POST sobre a URI <strong>http://www.minhaapi.com.br/v1/cliente</strong> um novo cliente será "inserido" na base de dados.
+    <br><br>
+    Este método não é considerado "Seguro" uma vez que o mesmo cria ou computa ações sobre recursos do servidor.
+  </dd>
+
+  <dt>PUT</dt>
+  <dd>
+    O método PUT tem por objetivo alterar um determinado recurso do servidor.
+    Por exemplo, ao efetuar um PUT sobre a URI <strong>http://www.minhaapi.com.br/v1/cliente/10</strong>
+    o cliente cujo ID 10, especificado na URL, será alterado mediante as informações passadas no body.
+  </dd>
+
+  <dt>DELETE</dt>
+  <dd>
+  O método DELETE tem por objetivo excluir um determinado recurso do servidor.
+  Por exemplo, ao efetuar um DELETE sobre a URI <strong>http://www.minhaapi.com.br/v1/cliente/10</strong>
+  o cliente cujo ID 10, especificado na URL, será excluído.
+  </dd>
+
+  <dt>TRACE</dt>
+  <dd>
+    Ecoa o pedido, de maneira que o cliente possa saber o que os servidores intermediários estão mudando em sua requisição.
+  </dd>
+
+  <dt>CONNECT</dt>
+  <dd>
+    Serve para uso com um proxy que possa se tornar um túnel SSL
+    (um túnel pode ser usado, por exemplo, para criar uma conexão segura).
+  </dd>
+</dl>

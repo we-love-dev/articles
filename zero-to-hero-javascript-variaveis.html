@@ -1,0 +1,234 @@
+<h2>
+  Introdução
+</h2>
+
+<p>
+    Este é o primeiro artigo da série <a target="_blank" href="/?search=Zero+to+hero+JavaScript">Zero to hero JavaScript</a>,
+    onde abordaremos os conhecimentos fundamentais para a compreenção e utilização plena
+    da linguagem.
+</p>
+
+<p>
+    Sempre que possível os artigos serão acompanhados de vídeos para auxiliar na assimilação,
+    portanto aguardem novidades e esperamos que aproveitem.
+</p>
+
+<h2>Declaração de variáveis</h2>
+
+<p>
+    JavaScript é uma linguagem case sensitive e fracamente tipada, ou seja,
+    não é necessário especificar explicitamente o tipo de uma variável em sua declaração.
+    Entretanto, um ponto importante que deve ser frisado é que JavaScript possue tipos que
+    são definidos e convertidos durante da execução dos scripts.
+</p>
+
+<p>
+    Para a declaração de variáveis é necessário utilizar as palavras chaves
+    <strong>var</strong>, <strong>let</strong> ou <strong>const</strong> onde as mesmas
+    delimitarão o escopo (que entenderemos adiante) e o comportamento da variável.
+</p>
+
+<p>
+    Exemplo:
+</p>
+
+<pre class="brush: js;">
+  var name = 'Renan Johannsen de Paula';
+
+  console.log(name);
+  // $ Renan Johannsen de Paula
+</pre>
+
+<p>
+    Se uma variável for declarada fora do modo estrito da linguagem sem a utilização de <strong>var</strong>, <strong>let</strong> ou <strong>const</strong>
+    a mesma será disponibilizada no escopo global. Este é um comportamento que muitas vezes não é desejado,
+    portanto é de suma importância conhecer e utilizar o modo estrito da linguagem.
+    Para saber mais sobre recomendo a leitura do artigo <a target="_blank" href="/post/zero-to-hero-javascript-strict-mode">Strict Mode</a>
+    disponível aqui no blog.
+</p>
+
+<p>
+    Vale ressaltar que <strong>let</strong> e <strong>const</strong>
+    são funcionalidades adicionadas na ECMAScript 2015 (ES6) portanto é preciso ficar atento com a compatibilidade
+    dos navegadores ou da versão do Nodejs utilizada em seu projeto.
+</p>
+
+<p>
+    Variáveis declaradas com <strong>const</strong>, como o próprio nome diz, possuem comportamento de constantes
+    e devem ser inicializadas em sua declaração, pois, em casos de modo restrito, a exceção SyntaxError será lançada.
+    Não confundam constantes com objetos imutáveis. Em artigos futuros abordaremos melhor a diferença entre ambos.
+</p>
+
+<h2>Hoisting</h2>
+<p>
+    Antes de entendermos os escopos e como as variáveis se comportam perante o seu contexto, é imprescindível
+    a compreensão do comportamento de Hoisting.
+</p>
+
+<p>
+    Em resumo, todas as declarações, seja de variáveis ou funções, são processadas e elevadas para o topo do arquivo ou da função
+    antes que qualquer código seja executado.
+</p>
+
+<p>
+    Observe os códigos abaixo.
+</p>
+
+<p>
+    Código "original" onde uma variável foi declarada e atribuído um valor qualquer a mesma dentro de um bloco:
+</p>
+
+<pre class="brush: js;">
+  {
+      var name = 'Renan Johannsen de Paula';
+  }
+
+  console.log(name);
+  // $ Renan Johannsen de Paula
+</pre>
+
+<p>
+    Devido ao comportamento de Hoisting a declaração é elevada ao topo do arquivo e a atribuição do valor é mantida
+    dentro do bloco resultando em:
+</p>
+
+<pre class="brush: js;">
+  var name;
+
+  {
+      name = 'Renan Johannsen de Paula';
+  }
+
+  console.log(name);
+  // $ Renan Johannsen de Paula
+</pre>
+
+<p>
+    Vale salientar que variáveis definidas com <strong>let</strong> ou <strong>const</strong> "não sofrem hoisting".
+</p>
+
+<p>
+    Caso possua dúvidas sobre este comportamento, fica aqui uma sugestão do
+    <a target="_blank" href="/post/zero-to-hero-javascript-hoisting">artigo sobre Hoisting</a>
+    postado no blog ou este
+    <a target="_blank" href="https://youtu.be/JGpekHQ_9kY?list=PLDm7BSK-M5YloYXPGmK_KEno4_Ql_Q5nS">vídeo</a>
+    do canal Aulas de Programação.
+</p>
+
+<h2>Escopos</h2>
+
+<p>
+    Existem 3 escopos em que as variáveis podem ser disponibilizadas:
+</p>
+
+<dl>
+    <dt>Global</dt>
+    <dd>
+        Variáveis declaradas com <strong>var</strong> fora de funções compõe o escopo global e podem ser acessadas livremente.
+
+        Exemplo:
+
+        <pre class="brush: js;">
+          {
+              // Como não há função, a declaração dentro do bloco sofre
+              // hoisting e a variável definida com var assume o escopo global
+              var name = 'Renan Johannsen de Paula';
+          }
+
+          console.log(name);
+          // $ Renan Johannsen de Paula
+        </pre>
+    </dd>
+
+    <dt>Local (Função)</dt>
+    <dd>
+        Variáveis declaradas com <strong>var</strong> dentro de funções ficam disponíveis
+        localmente dentro do escopo da função.
+
+        Exemplo:
+
+        <pre class="brush: js;">
+          function scope() {
+              var name = 'Renan Johannsen de Paula';
+              console.log(name);
+              // $ Renan Johannsen de Paula
+          }
+
+          scope();
+
+          console.log(name);
+          // $ ReferenceError: name is not defined
+        </pre>
+    </dd>
+
+    <dt>Bloco</dt>
+    <dd>
+        Variáveis declaradas com <strong>let</strong> e <strong>const</strong> possuem escopo de bloco, ou seja,
+        são vigentes a partir do bloco em que foram declaradas.
+
+        Exemplo:
+
+        <pre class="brush: js;">
+            {
+                let name = 'Renan Johannsen de Paula';
+                console.log(name);
+                // $ Renan Johannsen de Paula
+            }
+
+            console.log(name);
+            // $ ReferenceError: name is not defined
+        </pre>
+    </dd>
+</dl>
+
+<p>
+    A compreensão plena dos escopos é extremamente importante para evitar comportamentos
+    inesperados e manter nosso código consistente.
+</p>
+
+<h2>Convenções</h2>
+
+<p>
+    Para a nomeação de variáveis existem algumas regras que devemos seguir. Há também algumas convenções que podemos
+    adotar para compreendermos certos aspectos do nosso código só de olhar para o nome das variáveis.
+    Dentre elas estão:
+</p>
+
+<ol>
+  <li>Variáveis devem começar com <strong>letra</strong>, <strong>_</strong> ou <strong>$</strong>.
+  <li>Utilização do padrão <a target="_blank" href="https://pt.wikipedia.org/wiki/CamelCase">CamelCase</a>.
+      <strong>UpperCamelCase</strong> para funções construtoras e
+      <strong>lowerCamelCase</strong> para variáveis convencionais.
+  </li>
+  <li>Constantes declaradas com <strong>CAPITAL_CASING</strong>.</li>
+  <li>Variáveis locais iniciadas com <strong>_</strong>.</li>
+  <li>Variáveis iniciadas com <strong>$</strong> reservadas a frameworks, como o
+      <a target="_blank" href="https://angularjs.org/">AngularJS</a> e
+      <a target="_blank" href="https://angularjs.org/">jQuery</a>.</li>
+</ol>
+
+<p>
+    É claro que dependendo do contexto e da equipe, podem ser adotadas novas convenções ou padrões,
+    o importante é manter a uniformidade do projeto.
+</p>
+
+<h2>Conclusão</h2>
+
+<p>
+    Esperamos que esta série de artigos ajude na compreensão da essência e utilização
+    da linguagem no mercado.
+</p>
+
+<p>
+    JavaScript possue muitas características e comportamentos que não
+    estamos acostumados. Portanto, para termos sucesso e atingirmos o potencial máximo de nossas aplicações,
+    é de suma importância compreendermos estes comportamentos e características.
+</p>
+
+<p>
+    Não desista! Estude e dedique-se!
+</p>
+
+<p>
+    Até a proxima!
+</p>

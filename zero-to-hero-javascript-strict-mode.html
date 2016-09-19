@@ -1,0 +1,88 @@
+<h2>
+    Introdução
+</h2>
+<p>
+    O strict mode é uma feature disponível desde o ECMAScript 5. Através dela é possível optar por uma variante
+    restrita do JavaScript, onde seu código será interpretado de modo mais rigoroso.
+    Neste modo, a engine do JavaScript tem seu comportamento modificado, gerando erros que antes eram silenciados e, até
+    mesmo, proibindo o uso de certas partes da linguagem que são tidas como problemáticas ou imaturas (sintaxes de
+    versões futuras do ECMAScript), nos forçando assim a escrever um código de melhor qualidade e ajudando a capturar
+    bugs mais precocemente.
+</p>
+<p>
+    Existem navegadores que não suportam o strict mode em sua plenitude
+    (conforme a página <a class="special-link" href="http://kangax.github.io/compat-table/es5/">Compat Table</a>),
+    o que muitas vezes proporciona comportamentos lamentáveis. Portanto, caso sua aplicação possua uma gama peculiar
+    de browsers, fique atento a suas respectivas compatibilidades. Código strict mode e código não-strict mode podem
+    coexistir, então scripts podem optar pelo strict mode incrementalmente.
+</p>
+
+<h2>Invocando strict mode</h2>
+
+<p>
+    Scrict mode pode ser usado em <i>scripts</i> ou <i>funções individuais</i>. Elementos como <i>eval</i>,
+    <i>function</i>, atributos de <i>event handlers</i>, strings passadas para <i>setTimeout</i> e
+    coisas do tipo são <i>scripts</i> e, por isso, o strict mode funcionará adequadamente.
+</p>
+
+<h3>Strict mode para scripts</h3>
+
+<p>
+    Para invocar o strict mode em um script inteiro, simplesmente coloque a diretiva "use strict"; (ou 'use strict';)
+    antes de qualquer outra declaração:
+</p>
+
+<pre class="brush: js;">
+// Sintaxe strict mode para todo o script
+"use strict";
+var v = "Oi! Eu sou um script strict mode!";
+</pre>
+
+<p>
+    Mas cuidado! Essa abordagem pode ser uma cilada, visto que ao concatenar scripts podem ocorrer conflitos
+    indesejados. A Amazon que o diga, a empresa passou por problemas relacionados a isso, vejam dois "bugs" que deram o
+    que falar: <a class="special-link" href="https://bugzilla.mozilla.org/show_bug.cgi?id=579119">Bug 579119</a> e
+    <a class="special-link" href="https://bugzilla.mozilla.org/show_bug.cgi?id=627531">Bug 627531</a>).
+</p>
+<p>
+    Por isso, lembre-se:
+</p>
+<ul class="disc">
+    <li><b>Strict Mode + Não-Strict Mode = Strict Mode</b></li>
+    <li><b>Não-Strict Mode + Strict Mode = Não-Strict Mode</b></li>
+</ul>
+<p>
+    Alternativamente, a concatenação de tipos com a mesma definição (strict ou não-sctrict) acarretará em um script
+    final
+    equivalente. Portanto é recomendado que você ative strict mode função-por-função (pelo menos durante o período de
+    transição).
+</p>
+
+<h3>Strict mode para funções</h3>
+
+<p>
+    Da mesma forma, para invocar strict mode em uma função, coloque a diretiva "use strict"; (ou 'use strict';) no
+    corpo da função antes de qualquer outra declaração.
+</p>
+
+<pre class="brush: js;">
+function strict(){
+  // Sintaxe strict mode a nível de função
+  'use strict';
+  function nested() { return "E eu também!"; }
+  return "Oi! Eu sou uma função strict mode!  " + nested();
+}
+function notStrict() { return "Eu não sou strict."; }
+</pre>
+
+<h3>Por que usar?</h3>
+
+<p>Torna mais fácil e natural o desenvolvimento de JavaScript "seguro".</p>
+<p>Apresenta erro em "sintaxes inadequadas" (más práticas), geralmente aceitas em situções normais.</p>
+<p>Em JavaScript não-strict, você não será avisado caso crie uma variável global por engano (veja
+    <a class="special-link" href="http://stackoverflow.com/a/20115823/3072570">essa discussão</a>). Já no strict mode,
+    isto irá lançar um erro, tornando impossível criar acidentalmente uma variável global.</p>
+<p>Enfim, o strict mode é importante para que sejamos guiados às tendências e boas práticas de mercado. Além disso, o
+    feedback imediato da diretiva previne equivocos graves em nossos scripts.</p>
+
+<p>[]s</p>

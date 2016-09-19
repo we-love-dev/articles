@@ -1,0 +1,159 @@
+<h2>Introdução</h2>
+
+<p>
+    Caso você já esteja familiarizado com a linguagem JavaScript, deve ter percebido o quão flexível e
+    poderosa ela é. Entretanto, como diz o tio Ben, Grandes poderes trazem grandes responsabilidades!
+</p>
+
+<p>
+    Nesse artigo iremos explorar o conceito de <strong><i>Hoisting</i></strong>,
+    que nos permitirá criar aplicações robustas e protegidas de comportamentos inesperados.
+</p>
+
+
+<h2>Afinal o que é Hoisting?</h2>
+
+<p>
+    Para entendermos melhor sobre esse conceito, antes mesmo da explicação de como ele funciona vamos a
+    definição literal da palavra:
+</p>
+
+<p>
+    <i>Hoist</i> pela definição do inglês é a ação de elevar, subir, suspender algo.
+</p>
+
+<p>
+    Em JavaScript o conceito mantém a fidelidade da definição, visto que hoisting é o comportamento de
+    elevar as declarações ao topo do escopo em que elas são definidas. Isto significa que não importa a
+    ordem de declaração ou uso, por intermédio do <strong>hoisting</strong> o JavaScript sempre colocará as
+    declarações em primeiro lugar.
+</p>
+
+<blockquote>
+    "Hoisting is JavaScript's default behavior of moving declarations to the top."
+    <cite>w3schools</cite>
+</blockquote>
+
+<p>
+    Vamos a um exemplo prático:
+</p>
+
+<pre class="brush: js;">
+  var a = 10;
+
+  function printNumber() {
+    console.log(a);
+    var a = 5;
+  }
+  printNumber();
+</pre>
+
+<p>
+    Analisando o código somos tendenciosos a acreditar que o valor impresso será 10, uma vez que existe uma
+    declaração da variável "a" na linha 1 e o uso da mesma variável na linha 4, certo? Errado, isso porque não estamos lidando
+    com a mesma variável, uma vez que se tratam de <strong>escopos</strong> diferentes, se você não está familiarizado com o conceito de escopo em JavaScript,
+    sugiro a leitura do artigo sobre <a target="_blank" href="/post/zero-to-hero-javascript-variaveis">Variáveis</a>
+    da série <a target="_blank" href="/?search=Zero+to+hero+JavaScript">Zero to hero JavaScript</a>.
+</p>
+
+<p>
+    Então qual será a verdadeira saída do código acima? A resposta é <code>undefined</code>.
+</p>
+
+<p>
+    Vamos entender melhor o que o <i>hoisting</i> faz como nosso código. Como já sabemos a variável <code>a</code> na
+    linha 4 pertence ao escopo local da função <code>printNumber()</code> e também sabemos que o comportamento do hoisting
+    faz com que a declaração suba para o topo do escopo em que a variável foi declarada. Em linhas gerais nosso código é reestruturado
+    durante o processo de interpretação, ficando da seguinte maneira:
+</p>
+
+<pre class="brush: js;">
+  var a = 10;
+
+  function printNumber() {
+    // A declaração é elevada ao topo do escopo
+    var a = undefined;
+
+    // Nesse momento é impresso 'undefined' no console
+    console.log(a);
+
+    // A declaração original passa a ser entendida
+    // apenas como uma atribuição
+    a = 5;
+  }
+  printNumber();
+</pre>
+
+<h2>Hoisting sobre Funções</h2>
+
+<p>
+    Uma vez sabendo que o processo de hoisting atua sobre as declarações, então é válido afirmar que a declaração de uma função
+    também é incluída nesse comportamento.
+</p>
+
+<p>Vejamos um exemplo:</p>
+
+<pre class="brush: js;">
+  function getResult() {
+  	function returnResult() {
+    		return 'first';
+    }
+
+    return returnResult();
+
+    function returnResult() {
+    		return 'second';
+    }
+  }
+
+  var result = getResult();
+  console.log(result);
+</pre>
+
+<p>
+  Como dissemos inicialmente, JavaScript é uma linguagem extremamente flexível e a situação acima, apesar de atípica, é totalmente permitida.
+<p/>
+
+<p>
+  Mas como? Todo código após o <code>return</code> não é desconsiderado? Seria, se não houvesse o <strong>hoisting</strong>. Recapitulando, toda declação
+  em JavaScript é elevada ao topo do escopo, logo a declaração da função <code>returnResult()</code> na linha 8 é elevada e alocada após a primeira declaração.
+  Ficando dessa forma:
+</p>
+
+<pre class="brush: js;">
+  function getResult() {
+  	function returnResult() {
+    		return 'first';
+    }
+
+    function returnResult() {
+    		return 'second';
+    }
+
+    return returnResult();
+  }
+
+  var result = getResult();
+  console.log(result);
+</pre>
+
+<p>
+    Nesse caso a segunda declaração irá sobrepor a implementação da primeira, então teremos o valor <code>second</code> sendo impresso. Legal né? =)
+</p>
+
+<h2>Conclusão</h2>
+
+<p>
+    Hoisting é uma das características fortes que enfatizam a flexibilidade da linguagem JavaScript, garante o contrato da declaração em todo o seu escopo.
+    No entanto podemos ter problemas se acessarmos subníveis dessa variável antes de uma atribuição adequada, por isso é altamente aconselhado e adotado como
+    uma boa prática fazer sempre a declaração no início do escopo e polpar o <i>hoisting</i> desse trabalho, pois assim teremos mais controle e um código
+    mais legível para manutenções.
+</p>
+
+<p>
+  Bom é isso, espero que tenham gostado, bons estudos e...
+</p>
+
+<p>
+  Happy coding! ;)
+</p>
