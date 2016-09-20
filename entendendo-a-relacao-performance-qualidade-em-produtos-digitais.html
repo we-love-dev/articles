@@ -1,0 +1,123 @@
+<h2>
+  Entendendo a relação Performance &times; Qualidade em produtos digitais
+</h2>
+
+<p>
+  Wearables, robótica, IoT, a cada dia chegamos mais próximos à uma realidade na qual a tecnologia passa a ser a única opção para realizar nossas tarefas cotidianas. 
+</p>
+
+<p>
+  Devido ao grande avanço da tecnologia nos últimos tempos, novos hábitos e maneiras de interagir com produtos digitais foram estabelecidos, o que levou a uma mudança nas expectativas dos usuários perante o comportamento dos produtos atuais.
+  Nos dias de hoje, o nível de tolerância dos usuários perante ao tempo de carregamento das páginas é muito menor do que anos atrás. De acordo com uma <a href="https://blog.kissmetrics.com/loading-time/" target="_blank">pesquisa realizada pelo blog Kissmetrics</a>, 47% dos usuários esperam que a página carregue em no máximo 2 segundos.
+</p>
+
+<p>
+  Não levar em consideração a velocidade em que seu produto responde às interações pode afetar e muito a experiência dos usuários, resultando em um baixo número de conversões ou desdenho perante o produto.
+</p>
+
+
+<h2>Performance &times; Qualidade</h2>
+
+<p>
+  Todos sabemos que ter de esperar para completar uma tarefa não é algo prazeroso. Filas, aulas sem engajamento e transportes públicos são apenas alguns exemplos de situações de espera na qual estamos expostos diariamente. 
+</p>
+
+<p>
+  Ansiedade e frustração são sensações muito comuns ao olhar o relógio e ver que se passaram apenas cinco minutos, assim como olhar para uma tela em branco enquanto uma página está sendo carregada. Performance está diretamente relacionada à qualidade de um produto.
+</p>
+
+<p>
+  Por exemplo, você pode não saber nada de motores, mas espera que um carro esportivo atinja altas velocidades em um curto período de tempo. Caso contrário, você pode achar que há algo errado com o carro, ou ficar desapontado por o mesmo não atingir suas expectativas.
+</p>
+
+<p>
+  O mesmo conceito se aplica à produtos digitais. Várias expectativas são criadas ao interagir pela primeira vez com um produto. As vezes até antes de adquirí-lo, caso o produto tenha sido indicado por terceiros.  
+</p>
+
+<p>
+  Não satisfazer essas expectativas pode causar frustração aos usuários, alegando que o produto “não é tão bom quanto os outros”.
+</p>
+
+<p>
+  Um bom exemplo dessa relação pode ser encontrado no livro <a href="https://mitpress.mit.edu/books/laws-simplicity" target="_blank">The Laws of Simplicity</a>, de John Maeda, que faz a seguinte afirmação (de maneira adaptada):
+</p>
+
+<blockquote>
+  “ Economizar tempo cria a sensação de simplicidade “
+</blockquote>
+
+<p>
+  John também deixa duas perguntas que devem ser consideradas ao otimizar uma aplicação:
+
+  <ol>
+    <li>1. Como podemos diminuir o tempo de espera?</li>
+    <li>2. Como podemos fazer o tempo de espera mais tolerável?</li>
+  </ol>
+</p>
+
+<p>
+  O foco desse artigo se mantém na segunda pergunta, já que não entrará em detalhes técnicos de otimização.
+</p>
+
+<h2>Loading States</h2>
+
+<p>
+  Frequentemente menosprezados, loading states, ou estados de espera, representam uma parte significativa de qualquer produto. Ao trocar de uma tela para outra, ao interagir com servidor, ou até mesmo ao esperar por uma conexão com a Internet, o usuário será exposto à alguma forma de loading state. A maneira na qual esses estados são apresentados impacta diretamente na impressão que o usuário cria sobre o produto utilizado.
+</p>
+
+<p>
+  O conceito de percepção de velocidade se baseia na premissa de que as interações entre o usuário e o produto devem ser fluidas, mesmo que a arquitetura não funcione de maneira similar.
+</p>
+
+<h3>Skeleton Screens</h3>
+
+<p>
+  Spinners ou meros indicadores de progresso setam expectativas diferentes nos usuários, fazendo o usuário focar no indicador de progresso, ao invés do conteúdo que está sendo carregado, o que pode causar a sensação de que algo leva mais tempo para carregar do que o esperado.
+</p>
+
+<p>
+  Diante esse cenário, <a href="https://twitter.com/lukew" target="_blank">Luke Wroblewski</a> introduziu o conceito de skeleton screens, uma técnica na qual as formas básicas do conteúdo são apresentadas para o usuário como uma forma de loading state, visando focar os usuários no conteúdo que está sendo carregado, ao invés do quanto falta para ser carregado.
+</p>
+
+<p>
+  Atualmente essa técnica pode ser encontrada em vários produtos, como o Facebook, Google, Slack, Medium, etc..
+</p>
+
+<!--
+  img: http://curioustester.blogspot.com.br/2016/02/facilitating-better-interactions-using.html
+  img: http://qweos.tumblr.com/post/138660619202/skeleton-screens-indiegogo
+-->
+
+<h3>Interatividade otimizada</h3>
+
+<p>
+  Uma outra maneira para otimizar a velocidade percebida de um produto é considerar como um produto pode operar de maneira otimizada durante a interação com o usuário.
+</p>
+
+<p>
+  Parafraseando <a href="https://twitter.com/mikeyk" target="_blank">Mike Krieger</a>, co-fundador do Instagram (2011), “ninguém gosta de esperar enquanto eles esperam.”, ou seja, ao assumir que uma ação será completa sem efeitos colaterais, as interações serão vistas de maneira mais eficiente. 
+</p>
+
+<p>
+  Para clarificar esse conceito , um dos melhores exemplos é o Instagram. Seguindo o conceito de realizar atividades em segundo plano, a sensação de eficiência transmitida para o usuário é iminente: As interações parecem instantâneas.
+</p>
+
+<!-- img: https://www.fastcodesign.com/1669788/the-3-white-lies-behind-instagrams-lightning-speed -->
+
+<p>
+  No exemplo acima, ao clicar em Like, ou deixar um comentário, a ação é registrada no momento em que é realizada, dando a impressão de velocidade, porém a requisição para registrar definitivamente o “like” na foto ainda está sendo processada em segundo plano.
+</p>
+
+<p>
+  Ações como upload de mídia se beneficiam muito desse conceito, enviando arquivos para o servidor no momento em que é selecionado. Essa é uma maneira de evitar os momentos de espera ao final do fluxo de interação, aumentando a percepção de velocidade que o usuário tem perante o produto.
+</p>
+
+<h2>Conclusão</h2>
+
+<p>
+  Loading states podem fazer toda a diferença na hora em que o usuário decide ou não utilizar o produto oferecido. Pense cuidadosamente em como esses estados são apresentados para o usuário, e veja onde os conceitos acima podem ser aplicados, melhorando a qualidade do seu produto.
+</p>
+
+<p>
+  Até a próxima ;)
+</p>
