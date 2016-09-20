@@ -3,12 +3,210 @@
 </h2>
 
 <p>
-    Objetos em JavaScript podem conter um protótipo que por sua vez pode ser um objeto ou null. 
-    Essa característica basicamente nos permitem que objetos herdem propriedades e funções de outros objetos.
+    Em JavaScript a herança que tanto utilizamos em linguagens como Java ou C# é um pouquinho diferente.
+    Basicamente todo objeto possui uma cadeia de protótipos e suas propriedades são herdadas pelo objeto.
 </p>
 
 <p>
-    Neste artigo iremos aprender a manipular os protótipos e suas principais características.
+    Neste artigo iremos aprender a manipular protótipos junto de suas principais características.
+</p>
+
+<h3>Manipulação através de proto</h3>
+
+<p>
+    A primeira e mais simples forma de manipulação de protótipos se dá através da
+    propriedade <strong>proto</strong>.
+</p>
+
+<p>
+    Exemplo:
+</p>
+
+<pre class="brush: js;">
+    var pessoa = {
+      sexo: 'Masculino'
+    };
+
+    var renan = {
+      nome: 'Renan Johannsen de Paula',
+      idade: 24,
+      __proto__: pessoa
+    };
+
+    pessoa.sexo;
+    // $ Masculino
+</pre>
+
+<p>
+    Vale ressaltar que a propriedade <strong>proto</strong>
+    não é suportada por todos os interpretadores, portanto fique de olho.
+</p>
+
+<h3>
+    Manipulação através de Object.prototypeOf
+</h3>
+
+<p>
+    Uma forma mais elegante de manipulação do protótipo de objetos se dá através
+    dos métodos <strong>getPrototypeOf</strong> e <strong>setPrototypeOf</strong> contidos em Object.
+</p>
+
+<p>
+    Exemplo:
+</p>
+
+<pre class="brush: js;">
+    var pessoa = {
+        sexo: 'Masculino'
+    };
+
+    var renan = {
+        nome: 'Renan Johannsen de Paula',
+        idade: 24
+    };
+
+    Object.setPrototypeOf(renan, pessoa);
+
+    pessoa.sexo;
+    // $ Masculino
+</pre>
+
+<h3>
+    Manipulação através de Object.Create
+</h3>
+
+<p>
+    Outra forma de atribuição de protótipos é através do método <strong>create</strong>
+    contido em object. O mesmo recebe como parâmetro o protótipo a ser referenciando pelo objeto a ser criado.
+</p>
+
+<p>
+    Exemplo:
+</p>
+
+<pre class="brush: js;">
+    var pessoa = {
+        sexo: 'Masculino'
+    };
+
+    var renan = Object.create(pessoa);
+    renan.nome = 'Renan Johannsen de Paula';
+    renan.idade = 24;
+
+    pessoa.sexo;
+    // $ Masculino
+</pre>
+
+<h3>
+    Prototype em funções
+</h3>
+
+<p>
+    Funções em JavaScript possuem uma propriedade <strong>prototype</strong> que referencia um objeto vazio,
+    ou seja, quando estamos utilizando funções construtoras a forma de se
+    trabalhar com herança se dá através do acesso a essa propriedade.
+</p>
+
+<p>
+    Exemplo:
+</p>
+
+<pre class="brush: js;">
+    function Pessoa(nome, idade) {
+        this.nome = nome;
+        this.idade = idade;
+    }
+
+    Pessoa.prototype.sexo = 'Masculino';
+
+    var renan = new Pessoa('Renan Johannsen de Paula', 24);
+
+    renan.sexo;
+    // $ Masculino
+</pre>
+
+<h3>
+    Shadowing
+</h3>
+
+<p>
+    Uma característica da linguagem é que a busca por propriedades dentro dos objetos
+    se dá de forma recursiva, ou seja, as propriedades do objeto serão priorizadas perante ao protótipo.
+</p>
+
+<p>
+    Ao atribuirmos um valor a propridade herdado do objeto o valor do protótipo não
+    será sobrescrito, mas sim o objeto terá uma propriedade sombra do protótipo.
+</p>
+
+<p>
+    Exemplo:
+</p>
+
+<pre class="brush: js;">
+    var pessoa = {
+      sexo: 'Masculino'
+    };
+
+    var renan = Object.create(pessoa);
+    renan.nome = 'Renan Johannsen de Paula';
+    renan.idade = 24;
+    renan.sexo = 'Teste';
+
+    console.log(renan);
+    // $ { nome: 'Renan Johannsen de Paula', idade: 24, sexo: 'Teste' }
+
+    console.log(renan.sexo);
+    // $ Teste
+
+    console.log(Object.getPrototypeOf(renan).sexo);
+    // $ Masculuno
+</pre>
+
+<p>
+    Vale ressaltar que a criação de uma cadeia muito extensa de protótipos pode prejudicar
+    o tempo de acesso as propriedades, principalmente se estiverem no topo da cadeia.
+</p>
+
+<h3>
+    Conslusão
+</h3>
+
+<p>
+    A prototipação do JavaScripr nos fornece muitas possibilidades e é largamente utilizada.
+    Conhecer as suas principais características faz toda a diferença na hora de elaborar soluções.
+</p>
+
+<p>
+    Gostaria deixar como indicação dois vídeos sobre herança do
+    Rodrigo Branas que estão disponíveis em seu canal no YouTube.
+</p>
+
+<ul>
+    <li>
+        <a class="special-link" target="_blank" href="https://youtu.be/1Y0nSEMvTt0?list=PLQCmSnNFVYnT1-oeDOSBnt164802rkegc">
+            Desvendando a linguagem JavaScript - #14 - Herança - Parte 1
+        </a>
+    </li>
+    <li>
+        <a class="special-link" target="_blank" href="https://youtu.be/hDhoO86cfh8?list=PLQCmSnNFVYnT1-oeDOSBnt164802rkegc">
+            Desvendando a linguagem JavaScript - #15 - Herança - Parte 2
+        </a>
+    </li>
+</ul>
+
+<p>
+    Espero que vocês tenham gostado!
+</p>
+
+<p>
+    Não se esqueçam de conferir os outros artigos da série
+    <a target="_blank" href="/?search=Zero+to+hero+JavaScript">
+        Zero to hero JavaScript</a>.
+</p>
+
+<p>
+    Até a próxima e Abraços!
 </p>
 
 <p>
