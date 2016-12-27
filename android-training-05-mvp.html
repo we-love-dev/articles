@@ -1,0 +1,170 @@
+<h2>
+  Problema
+</h2>
+
+<p>
+  Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis.
+  Pra lá , depois divoltis eitis, paradis. <a class="special-link" href="#">Paisis, filhis, espiritis santis</a>. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris <kbd>alt + shift + r</kbd> qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.
+</p>
+
+<blockquote>
+  "Uma imagem vale mil palavras. Uma interface vale mil imagens."
+  <cite>Ben Shneiderman</cite>
+</blockquote>
+
+<h2>
+  Solução
+</h2>
+
+<p>
+  Mussum ipsum cacilds, litro abertis. Consetis adipiscings elitis. Pra lá , depois divoltis eitis, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum <abbr title="Data Access Object">DAO</abbr> girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga.
+</p>
+
+<dl>
+  <dt>Definição 1</dt>
+  <dd>
+    Mussum ipsum cacilds, vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga.
+  </dd>
+
+  <dt>Definição 2</dt >
+  <dd>
+    Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim.
+  </dd>
+</dl>
+
+<h3>
+  Passos
+</h3>
+
+<ol>
+  <li>Mé faiz elementum girarzis.</li>
+  <li>In elementis mé pra quem é amistosis quis leo.</li>
+  <li>Sapien in monti palavris qui num significa nadis i pareci latim</li>
+  <li>Manduma pindureta quium dia nois paga.</li>
+</ol>
+
+<p>
+  Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis.
+  Pra lá , depois divoltis <strong>eitis</strong>, paradis. Paisis, filhis, espiritis santis. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. <em>"Sapien in monti palavris qui num significa nadis i pareci latim."</em> Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.
+</p>
+
+<figure class="width-70 center radius">
+  <img class="width-100" alt="This is an image" src="http://placehold.it/600x350&text=[img]">
+
+  <figcaption class="text-center">
+    <a class="special-link" href="#">Image crédits</a>
+  </figcaption>
+</figure>
+
+<p>
+  Mussum ipsum cacilds, vidis litro abertis. Consetis adipiscings elitis.
+  Pra lá , depois divoltis eitis, <code>public class PhysicPersonBuilder</code>. Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo. Manduma pindureta quium dia nois paga. Sapien in monti palavris qui num significa nadis i pareci latim. Interessantiss quisso pudia ce receita de bolis, mais bolis eu num gostis.
+</p>
+
+<h3>
+  Veja o exemplo
+</h3>
+
+<pre class="brush: java; highlight: [3, 61]">
+  public class PhysicPersonBuilder {
+
+    private PhysicPerson physicPerson;
+
+    public PhysicPersonBuilder() {
+      this.physicPerson = new PhysicPerson();
+    }
+
+    public PhysicPersonBuilder withId(Integer id) {
+      this.physicPerson.setId(id);
+      return this;
+    }
+
+    public PhysicPersonBuilder withEmail(Email email) {
+      if (this.physicPerson.getEmails() == null)
+        this.physicPerson.setEmails(new ArrayList&lt;Email&gt;());
+
+      this.physicPerson.getEmails().add(email);
+      return this;
+    }
+
+    public PhysicPersonBuilder withAddress(Address address) {
+      if (this.physicPerson.getAddress() == null)
+        this.physicPerson.setAddress(new ArrayList&lt;Address&gt;());
+
+      this.physicPerson.getAddress().add(address);
+      return this;
+    }
+
+    public PhysicPerson create() {
+      return this.physicPerson;
+    }
+  }</pre>
+
+<h3>
+  JavaScript
+</h3>
+
+<pre class="brush: js;">
+  function myFunction() {
+    alert("Hello World!");
+  }</pre>
+
+<h3>
+  SQL
+</h3>
+
+<pre class="brush: sql;">
+  SELECT * FROM client WHERE active LIKE 'true';</pre>
+
+<h3>
+  XML
+</h3>
+
+<pre class="brush: xml; highlight: 5">
+  <?xml version="1.0"?>
+  <note>
+    <to>Tove</to>
+    <from>Jani</from>
+    <heading>Reminder</heading>
+    <body>Don't forget me this weekend!</body>
+  </note></pre>
+
+<h3>
+  Conclusão
+</h3>
+
+<p>
+  Odit, adipisci libero quasi dolorem voluptate? Voluptas tempora accusantium placeat beatae velit et nulla, possimus delectus, doloremque error porro illum at, minus nobis vitae ut eius, accusamus enim! Doloremque, facere dolorum. Inventore.
+</p>
+
+<p>
+  Eu recomendo alguns artigos sobre o Padrão de Projeto Builder. Confira os links abaixo:
+</p>
+
+<ul class="disc">
+  <li>
+    <a class="special-link" target="_blank" href="#">Builder, quando usá-lo por Creide</a>
+  </li>
+  <li>
+    <a class="special-link" target="_blank" href="#">Construindo entidades com Builder por Gertrudes</a>
+  </li>
+  <li>
+    <a class="special-link" target="_blank" href="#">Builder? What is it? por Jetrovis</a>
+  </li>
+  <li>
+    <a class="special-link" target="_blank" href="#">Design Pattern: Builder por Java documentation</a>
+  </li>
+</ul>
+
+<h3>
+  Extra: Vídeo tutorial
+</h3>
+
+<div class="flex-video">
+  <iframe width="420" height="315" src="http://www.youtube.com/embed/0_EW8aNgKlA" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<p>
+  Mé faiz elementum girarzis, nisi eros vermeio, in elementis mé pra quem é amistosis quis leo.
+  Manduma pindureta quium dia nois paga. ;)
+</p>
